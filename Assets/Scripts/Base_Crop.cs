@@ -15,6 +15,13 @@ public class Base_Crop : MonoBehaviour
     [SerializeField]
     protected int m_harvestAmount = 0;
 
+    public enum ECropTypes
+    {
+        CROP_CORN,
+        CROP_TOMATO,
+        CROP_WHEAT
+    }
+
     private void Start()
     {
         StartGrowing();
