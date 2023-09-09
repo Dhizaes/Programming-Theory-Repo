@@ -4,5 +4,13 @@ using UnityEngine;
 
 public class Crop_Corn : Base_Crop
 {
+    protected override void OnGrowStarted()
+    {
 
+    }
+
+    protected override void OnGrowStopped()
+    {
+
+    }
 }
