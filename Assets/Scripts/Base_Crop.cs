@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class Base_Crop : MonoBehaviour
 {
+    public FarmTile bindedFarmTile;
+
     public bool IsGrowing { get; private set; }
     public bool IsReady { get; private set; }
 
     protected int m_timeUntilGrow = 60;
     protected int m_elapsedTime = 0;
 
-    protected int m_cropAmount = 0;
+    [SerializeField]
+    protected int m_harvestAmount = 0;
+
+    private void Start()
+    {
+        StartGrowing();
+    }
 
     IEnumerator GrowCountdown()
     {
@@ -20,6 +28,7 @@ public class Base_Crop : MonoBehaviour
         {
             m_elapsedTime = 0;
             IsReady = true;
+            IsGrowing = false;
         }
         else
         {
@@ -39,18 +48,13 @@ public class Base_Crop : MonoBehaviour
         StopCoroutine(GrowCountdown());
     }
 
-    public void Harvest()
+    public void Harvest(int amount)
     {
         if(IsReady)
         {
             IsReady = false;
 
-
+            Destroy(gameObject);
         }
-    }
-
-    protected virtual void AddAmount(int amount)
-    {
-
     }
 }
