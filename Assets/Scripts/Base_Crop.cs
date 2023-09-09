@@ -63,5 +63,19 @@ public class Base_Crop : MonoBehaviour
 
             Destroy(gameObject);
         }
+        else
+        {
+            Notification.NotificationManager.SendNotification("Crop isn't ready for harvest");
+        }
+    }
+
+    protected virtual void OnGrowStarted()
+    {
+
+    }
+
+    protected virtual void OnGrowStopped()
+    {
+
     }
 }
