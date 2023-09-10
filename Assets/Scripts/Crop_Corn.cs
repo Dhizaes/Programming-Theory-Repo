@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Crop_Corn : Base_Crop
 {
-    protected override void OnGrowStarted()
+    private new void Start()
     {
+        base.Start();
 
+        SetCropType(ECropTypes.CROP_CORN);
     }
 
-    protected override void OnGrowStopped()
+    protected override void OnGrowReady()
     {
-
+        Debug.Log("Corn grow ready");
     }
 }

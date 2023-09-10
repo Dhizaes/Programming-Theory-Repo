@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class Crop_Wheat : Base_Crop
 {
-    
-    protected override void OnGrowStarted()
+    private new void Start()
     {
+        base.Start();
+
+        SetCropType(ECropTypes.CROP_WHEAT);
     }
 
-    protected override void OnGrowStopped()
+    protected override void OnGrowReady()
     {
+        Debug.Log("Wheat grow ready");
     }
 }

@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Crop_Tomato : Base_Crop
 {
-    protected override void OnGrowStarted()
+    private new void Start()
     {
+        base.Start();
 
+        SetCropType(ECropTypes.CROP_TOMATO);
     }
 
-    protected override void OnGrowStopped()
+    protected override void OnGrowReady()
     {
-
+        Debug.Log("Tomato grow ready");
     }
 }
