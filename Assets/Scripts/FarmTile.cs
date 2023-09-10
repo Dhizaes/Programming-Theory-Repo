@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class FarmTile : MonoBehaviour, IPointerClickHandler
+public class FarmTile : MonoBehaviour
 {
     [SerializeField]
     Sprite EmptySprite;
@@ -15,28 +15,64 @@ public class FarmTile : MonoBehaviour, IPointerClickHandler
 
     public bool IsEmpty = true;
 
+    private GameObject currentCrop;
+
+    public Farmer GetPlayerFarmer()
+    {
+        return playerFarmer;
+    }
+
     void Start()
     {
-        playerFarmer = GameObject.Find("Farmer").GetComponent<Farmer>();
+        playerFarmer = Camera.main.gameObject.GetComponent<Farmer>();        
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    private void OnMouseDown()
     {
-        
+        if(IsEmpty)
+        {
+            playerFarmer.selectedFarmTile = this;
+            Debug.Log("Selected farm tile: " + this.name);
+        }
+        else
+        {
+            if(!ReferenceEquals(currentCrop, null))
+            {
+                Base_Crop cropClass = currentCrop.GetComponent<Base_Crop>();
+
+                if(!cropClass.IsGrowing && cropClass.IsReady)
+                {
+                    cropClass.Harvest();
+
+                    IsEmpty = true;
+                }
+            }
+        }
     }
 
-    public void PlantSeed(Base_Crop.ECropTypes selectedCrop)
+    public void PlantSeed(GameObject plantObject)
     {
         if (!ReferenceEquals(playerFarmer, null))
         {
             if (IsEmpty)
             {
+                if(playerFarmer.cropList.Length > 0)
+                {
+                    IsEmpty = false;
 
+                    currentCrop = Instantiate(plantObject, transform);
+                    Base_Crop cropClass = currentCrop.GetComponent<Base_Crop>();
+                    cropClass.bindedTile = this;
+                }
+                else
+                {
+                    Notification.NotificationManager.SendNotification("Crop list is empty", Notification.ENotificationType.NOTIFICATION_ERROR);
+                }
             }
         }
         else
         {
-            Notification.NotificationManager.SendNotification("Farm tile reference is empty", Notification.ENotificationType.NOTIFICATION_ERROR);
+            Notification.NotificationManager.SendNotification("Farmer reference is empty", Notification.ENotificationType.NOTIFICATION_ERROR);
         }
     }
 }

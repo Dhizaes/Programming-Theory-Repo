@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class Base_Crop : MonoBehaviour
 {
-    public FarmTile bindedFarmTile;
+    [SerializeField]
+    Sprite cropGrowingSprite;
+    [SerializeField]
+    Sprite cropReadySprite;
+
+    protected SpriteRenderer spriteRenderer;
 
     public bool IsGrowing { get; private set; }
     public bool IsReady { get; private set; }
@@ -15,31 +20,55 @@ public class Base_Crop : MonoBehaviour
     [SerializeField]
     protected int m_harvestAmount = 0;
 
+    public FarmTile bindedTile;
+
     public enum ECropTypes
     {
+        NONE,
         CROP_CORN,
         CROP_TOMATO,
         CROP_WHEAT
     }
 
-    private void Start()
+    protected ECropTypes m_cropType = ECropTypes.NONE;
+
+    public ECropTypes GetCropType()
     {
+        return m_cropType;
+    }
+
+    public void SetCropType(ECropTypes cropType)
+    {
+        m_cropType = cropType;
+    }
+
+    protected void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         StartGrowing();
     }
 
     IEnumerator GrowCountdown()
     {
-        yield return new WaitForSeconds(1);
+        bool countIt = true;
 
-        if (m_elapsedTime > m_timeUntilGrow)
+        while(countIt)
         {
-            m_elapsedTime = 0;
-            IsReady = true;
-            IsGrowing = false;
-        }
-        else
-        {
-            m_elapsedTime++;
+            yield return new WaitForSeconds(1);
+
+            if (m_elapsedTime > m_timeUntilGrow)
+            {
+                countIt = false;
+
+                m_elapsedTime = 0;
+
+                OnGrowReady();
+            }
+            else
+            {
+                m_elapsedTime++;
+            }
         }
     }
 
@@ -51,15 +80,20 @@ public class Base_Crop : MonoBehaviour
 
     public void StopGrowing()
     {
-        IsGrowing = true;
+        IsGrowing = false;
         StopCoroutine(GrowCountdown());
     }
 
-    public void Harvest(int amount)
+    public void Harvest()
     {
         if(IsReady)
         {
             IsReady = false;
+
+            if(!ReferenceEquals(bindedTile, null))
+            {
+                bindedTile.GetPlayerFarmer().AddCrop(GetCropType(), m_harvestAmount);
+            }
 
             Destroy(gameObject);
         }
@@ -69,13 +103,30 @@ public class Base_Crop : MonoBehaviour
         }
     }
 
-    protected virtual void OnGrowStarted()
+    protected virtual void OnGrowReady()
     {
+        if(!ReferenceEquals(spriteRenderer, null))
+        {
+            spriteRenderer.sprite = cropReadySprite;
+        }
 
+        IsReady = true;
+
+        StopGrowing();
     }
 
-    protected virtual void OnGrowStopped()
+    public string CropTypeToString(ECropTypes cropType)
     {
-
+        switch(cropType)
+        {
+            case ECropTypes.CROP_CORN:
+                return "Corn";
+            case ECropTypes.CROP_TOMATO:
+                return "Tomato";
+            case ECropTypes.CROP_WHEAT:
+                return "Wheat";
+            default:
+                return "Unknown";
+        }
     }
 }
