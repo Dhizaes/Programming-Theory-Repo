@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Farmer : MonoBehaviour
 {
@@ -10,6 +11,25 @@ public class Farmer : MonoBehaviour
     private int m_tomatoes     = 0;
     private int m_wheats       = 0;
     private int m_wheatSeeds   = 0;
+
+    public GameObject[] cropList;
+
+    public FarmTile selectedFarmTile;
+
+    public void PlantCorn()
+    {
+        selectedFarmTile.PlantSeed(cropList[0]);
+    }
+
+    public void PlantTomato()
+    {
+        selectedFarmTile.PlantSeed(cropList[1]);
+    }
+
+    public void PlantWheat()
+    {
+        selectedFarmTile.PlantSeed(cropList[2]);
+    }
 
     public void AddSeed(Base_Crop.ECropTypes cropType, int amount)
     {
