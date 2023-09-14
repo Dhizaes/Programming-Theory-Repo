@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class Crop_Corn : Base_Crop
 {
-    private new void Start()
+    private void Awake()
     {
-        base.Start();
-
         SetCropType(ECropTypes.CROP_CORN);
     }
 
