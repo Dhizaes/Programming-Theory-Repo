@@ -88,7 +88,6 @@ public class Farmer : MonoBehaviour
                 if (!ReferenceEquals(plantButtons[i], null))
                 {
                     plantButtons[i].interactable = false;
-                    Debug.Log("fsa");
                 }
             }
         }
