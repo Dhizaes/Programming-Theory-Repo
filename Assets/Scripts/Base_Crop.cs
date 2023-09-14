@@ -94,6 +94,11 @@ public class Base_Crop : MonoBehaviour
             if(!ReferenceEquals(bindedTile, null))
             {
                 bindedTile.GetPlayerFarmer().AddCrop(GetCropType(), m_harvestAmount);
+
+                if (UnityEngine.Random.Range(1, 5) == 1)
+                {
+                    bindedTile.GetPlayerFarmer().AddSeed(GetCropType(), UnityEngine.Random.Range(1, 2));
+                }
             }
 
             Destroy(gameObject);
