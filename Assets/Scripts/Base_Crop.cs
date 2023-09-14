@@ -37,7 +37,7 @@ public class Base_Crop : MonoBehaviour
         return m_cropType;
     }
 
-    public void SetCropType(ECropTypes cropType)
+    protected void SetCropType(ECropTypes cropType)
     {
         m_cropType = cropType;
     }
