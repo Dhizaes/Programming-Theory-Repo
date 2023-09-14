@@ -29,22 +29,32 @@ public class FarmTile : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(IsEmpty)
+        if (!ReferenceEquals(playerFarmer, null))
         {
-            playerFarmer.selectedFarmTile = this;
-            Debug.Log("Selected farm tile: " + this.name);
-        }
-        else
-        {
-            if(!ReferenceEquals(currentCrop, null))
+            if (IsEmpty)
             {
-                Base_Crop cropClass = currentCrop.GetComponent<Base_Crop>();
+                playerFarmer.selectedFarmTile = this;
 
-                if(!cropClass.IsGrowing && cropClass.IsReady)
+                Debug.Log("Selected farm tile: " + this.name);
+
+                playerFarmer.EnablePlantButtons();
+            }
+            else
+            {
+                if (!ReferenceEquals(currentCrop, null))
                 {
-                    cropClass.Harvest();
+                    Base_Crop cropClass = currentCrop.GetComponent<Base_Crop>();
 
-                    IsEmpty = true;
+                    if (!cropClass.IsGrowing && cropClass.IsReady)
+                    {
+                        cropClass.Harvest();
+
+                        IsEmpty = true;
+                    }
+                }
+                else
+                {
+                    playerFarmer.DisablePlantButtons();
                 }
             }
         }
@@ -63,6 +73,8 @@ public class FarmTile : MonoBehaviour
                     currentCrop = Instantiate(plantObject, transform);
                     Base_Crop cropClass = currentCrop.GetComponent<Base_Crop>();
                     cropClass.bindedTile = this;
+
+                    playerFarmer.selectedFarmTile = null;
                 }
                 else
                 {
