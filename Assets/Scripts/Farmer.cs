@@ -69,14 +69,11 @@ public class Farmer : MonoBehaviour
     {
         if(plantButtons.Length > 0)
         {
-            if(!ReferenceEquals(selectedFarmTile, null))
+            for (int i = 0; i < plantButtons.Length; i++)
             {
-                for (int i = 0; i < plantButtons.Length; i++)
+                if (!ReferenceEquals(plantButtons[i], null))
                 {
-                    if (!ReferenceEquals(plantButtons[i], null))
-                    {
-                        plantButtons[i].enabled = true;
-                    }
+                    plantButtons[i].interactable = true;
                 }
             }
         }
@@ -86,14 +83,12 @@ public class Farmer : MonoBehaviour
     {
         if (plantButtons.Length > 0)
         {
-            if (!ReferenceEquals(selectedFarmTile, null))
+            for (int i = 0; i < plantButtons.Length; i++)
             {
-                for (int i = 0; i < plantButtons.Length; i++)
+                if (!ReferenceEquals(plantButtons[i], null))
                 {
-                    if (!ReferenceEquals(plantButtons[i], null))
-                    {
-                        plantButtons[i].enabled = false;
-                    }
+                    plantButtons[i].interactable = false;
+                    Debug.Log("fsa");
                 }
             }
         }

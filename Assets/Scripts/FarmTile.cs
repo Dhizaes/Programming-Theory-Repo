@@ -24,7 +24,7 @@ public class FarmTile : MonoBehaviour
 
     void Start()
     {
-        playerFarmer = Camera.main.gameObject.GetComponent<Farmer>();        
+        playerFarmer = Camera.main.gameObject.GetComponent<Farmer>();
     }
 
     private void OnMouseDown()
@@ -52,10 +52,8 @@ public class FarmTile : MonoBehaviour
                         IsEmpty = true;
                     }
                 }
-                else
-                {
-                    playerFarmer.DisablePlantButtons();
-                }
+
+                playerFarmer.DisablePlantButtons();
             }
         }
     }
