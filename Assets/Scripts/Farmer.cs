@@ -20,17 +20,44 @@ public class Farmer : MonoBehaviour
 
     public void PlantCorn()
     {
-        selectedFarmTile.PlantSeed(cropList[0]);
+        for (int i = 0; i < cropList.Length; i++)
+        {
+            Crop_Corn temp = cropList[i].GetComponent<Crop_Corn>();
+
+            if (!ReferenceEquals(temp, null))
+            {
+                selectedFarmTile.PlantSeed(cropList[i]);
+                return;
+            }
+        }
     }
 
     public void PlantTomato()
     {
-        selectedFarmTile.PlantSeed(cropList[1]);
+        for (int i = 0; i < cropList.Length; i++)
+        {
+            Crop_Tomato temp = cropList[i].GetComponent<Crop_Tomato>();
+
+            if (!ReferenceEquals(temp, null))
+            {
+                selectedFarmTile.PlantSeed(cropList[i]);
+                return;
+            }
+        }
     }
 
     public void PlantWheat()
     {
-        selectedFarmTile.PlantSeed(cropList[2]);
+        for (int i = 0; i < cropList.Length; i++)
+        {
+            Crop_Wheat temp = cropList[i].GetComponent<Crop_Wheat>();
+
+            if (!ReferenceEquals(temp, null))
+            {
+                selectedFarmTile.PlantSeed(cropList[i]);
+                return;
+            }
+        }
     }
 
     public void AddSeed(Base_Crop.ECropTypes cropType, int amount)
