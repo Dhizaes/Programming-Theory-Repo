@@ -7,8 +7,8 @@ public class Farmer : MonoBehaviour
 {
     private int m_corns = 0;
     private int m_cornSeeds = 0;
+    private int m_tomatoes = 0;
     private int m_tomatoeSeeds = 0;
-    private int m_tomatoes     = 0;
     private int m_wheats       = 0;
     private int m_wheatSeeds   = 0;
 
@@ -16,7 +16,19 @@ public class Farmer : MonoBehaviour
 
     public GameObject[] cropList;
 
+    public TMPro.TMP_Text cropInformationText;
+
     public FarmTile selectedFarmTile;
+
+    private void Start()
+    {
+        UpdateCropInformation();
+    }
+
+    public void UpdateCropInformation()
+    {
+        cropInformationText.text = "Corn: " + m_corns.ToString("00000") + " - Tomato: " + m_tomatoes.ToString("00000") + " - Wheat: " + m_wheats.ToString("00000");
+    }
 
     public void PlantCorn()
     {

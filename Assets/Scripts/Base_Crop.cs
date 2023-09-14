@@ -94,6 +94,7 @@ public class Base_Crop : MonoBehaviour
             if(!ReferenceEquals(bindedTile, null))
             {
                 bindedTile.GetPlayerFarmer().AddCrop(GetCropType(), m_harvestAmount);
+                bindedTile.GetPlayerFarmer().UpdateCropInformation();
             }
 
             Destroy(gameObject);
