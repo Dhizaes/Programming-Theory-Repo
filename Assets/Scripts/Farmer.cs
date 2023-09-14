@@ -12,7 +12,9 @@ public class Farmer : MonoBehaviour
     private int m_wheats       = 0;
     private int m_wheatSeeds   = 0;
 
-    public Button[] plantButtons;
+    public Button cornPlantButton;
+    public Button tomatoPlantButton;
+    public Button wheatPlantButton;
 
     public GameObject[] cropList;
 
@@ -89,12 +91,15 @@ public class Farmer : MonoBehaviour
         {
             case Base_Crop.ECropTypes.CROP_CORN:
                 m_cornSeeds += amount;
+                cornPlantButton.interactable = true;
                 break;
             case Base_Crop.ECropTypes.CROP_TOMATO:
                 m_tomatoSeeds += amount;
+                cornPlantButton.interactable = true;
                 break;
             case Base_Crop.ECropTypes.CROP_WHEAT:
                 m_wheatSeeds += amount;
+                cornPlantButton.interactable = true;
                 break;
         }
 
@@ -107,12 +112,18 @@ public class Farmer : MonoBehaviour
         {
             case Base_Crop.ECropTypes.CROP_CORN:
                 m_cornSeeds--;
+                if (m_cornSeeds < 1)
+                    cornPlantButton.interactable = false;
                 break;
             case Base_Crop.ECropTypes.CROP_TOMATO:
                 m_tomatoSeeds--;
+                if (m_tomatoSeeds < 1)
+                    tomatoPlantButton.interactable = false;
                 break;
             case Base_Crop.ECropTypes.CROP_WHEAT:
                 m_wheatSeeds--;
+                if (m_wheatSeeds < 1)
+                    wheatPlantButton.interactable = false;
                 break;
         }
 
@@ -149,15 +160,8 @@ public class Farmer : MonoBehaviour
 
     private void ToggleButtons(bool toggle)
     {
-        if (plantButtons.Length > 0)
-        {
-            for (int i = 0; i < plantButtons.Length; i++)
-            {
-                if (!ReferenceEquals(plantButtons[i], null))
-                {
-                    plantButtons[i].interactable = toggle;
-                }
-            }
-        }
+        cornPlantButton.interactable = toggle;
+        tomatoPlantButton.interactable = toggle;
+        wheatPlantButton.interactable = toggle;
     }
 }
