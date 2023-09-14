@@ -8,7 +8,7 @@ public class Farmer : MonoBehaviour
     private int m_corns = 0;
     private int m_cornSeeds = 0;
     private int m_tomatoes = 0;
-    private int m_tomatoeSeeds = 0;
+    private int m_tomatoSeeds = 0;
     private int m_wheats       = 0;
     private int m_wheatSeeds   = 0;
 
@@ -17,17 +17,28 @@ public class Farmer : MonoBehaviour
     public GameObject[] cropList;
 
     public TMPro.TMP_Text cropInformationText;
+    public TMPro.TMP_Text seedInformationText;
 
     public FarmTile selectedFarmTile;
 
     private void Start()
     {
         UpdateCropInformation();
+        UpdateSeedInformation();
+
+        AddSeed(Base_Crop.ECropTypes.CROP_CORN, UnityEngine.Random.Range(1, 5));
+        AddSeed(Base_Crop.ECropTypes.CROP_TOMATO, UnityEngine.Random.Range(1, 5));
+        AddSeed(Base_Crop.ECropTypes.CROP_WHEAT, UnityEngine.Random.Range(1, 5));
     }
 
-    public void UpdateCropInformation()
+    private void UpdateCropInformation()
     {
         cropInformationText.text = "Corn: " + m_corns.ToString("00000") + " - Tomato: " + m_tomatoes.ToString("00000") + " - Wheat: " + m_wheats.ToString("00000");
+    }
+
+    private void UpdateSeedInformation()
+    {
+        seedInformationText.text = "Corn seeds: " + m_cornSeeds.ToString("000") + " - Tomato seeds: " + m_tomatoSeeds.ToString("000") + " - Wheat seeds: " + m_wheatSeeds.ToString("000");
     }
 
     public void PlantCorn()
@@ -80,12 +91,32 @@ public class Farmer : MonoBehaviour
                 m_cornSeeds += amount;
                 break;
             case Base_Crop.ECropTypes.CROP_TOMATO:
-                m_tomatoeSeeds += amount;
+                m_tomatoSeeds += amount;
                 break;
             case Base_Crop.ECropTypes.CROP_WHEAT:
                 m_wheatSeeds += amount;
                 break;
         }
+
+        UpdateSeedInformation();
+    }
+
+    public void DropSeed(Base_Crop.ECropTypes cropType)
+    {
+        switch (cropType)
+        {
+            case Base_Crop.ECropTypes.CROP_CORN:
+                m_cornSeeds--;
+                break;
+            case Base_Crop.ECropTypes.CROP_TOMATO:
+                m_tomatoSeeds--;
+                break;
+            case Base_Crop.ECropTypes.CROP_WHEAT:
+                m_wheatSeeds--;
+                break;
+        }
+
+        UpdateSeedInformation();
     }
 
     public void AddCrop(Base_Crop.ECropTypes cropType, int amount)
@@ -102,6 +133,8 @@ public class Farmer : MonoBehaviour
                 m_wheats += amount;
                 break;
         }
+
+        UpdateCropInformation();
     }
 
     public void EnablePlantButtons()
