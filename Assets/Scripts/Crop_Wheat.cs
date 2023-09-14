@@ -13,6 +13,8 @@ public class Crop_Wheat : Base_Crop
 
     protected override void OnGrowReady()
     {
+        base.OnGrowReady();
+
         Debug.Log("Wheat grow ready");
     }
 }

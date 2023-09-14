@@ -13,6 +13,8 @@ public class Crop_Corn : Base_Crop
 
     protected override void OnGrowReady()
     {
+        base.OnGrowReady();
+
         Debug.Log("Corn grow ready");
     }
 }

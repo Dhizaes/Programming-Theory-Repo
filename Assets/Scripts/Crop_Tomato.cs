@@ -13,6 +13,8 @@ public class Crop_Tomato : Base_Crop
 
     protected override void OnGrowReady()
     {
+        base.OnGrowReady();
+
         Debug.Log("Tomato grow ready");
     }
 }
