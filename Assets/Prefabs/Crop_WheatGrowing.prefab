@@ -99,5 +99,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cropGrowingSprite: {fileID: 21300080, guid: 2700e06d970d112489ff23cfb58c3f78, type: 3}
   cropReadySprite: {fileID: 21300078, guid: 2700e06d970d112489ff23cfb58c3f78, type: 3}
+  timeUntilGrow: 10
   m_harvestAmount: 6
   bindedTile: {fileID: 0}
