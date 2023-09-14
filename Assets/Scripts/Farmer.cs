@@ -94,19 +94,15 @@ public class Farmer : MonoBehaviour
 
     public void EnablePlantButtons()
     {
-        if(plantButtons.Length > 0)
-        {
-            for (int i = 0; i < plantButtons.Length; i++)
-            {
-                if (!ReferenceEquals(plantButtons[i], null))
-                {
-                    plantButtons[i].interactable = true;
-                }
-            }
-        }
+        ToggleButtons(true);
     }
 
     public void DisablePlantButtons()
+    {
+        ToggleButtons(false);
+    }
+
+    private void ToggleButtons(bool toggle)
     {
         if (plantButtons.Length > 0)
         {
@@ -114,7 +110,7 @@ public class Farmer : MonoBehaviour
             {
                 if (!ReferenceEquals(plantButtons[i], null))
                 {
-                    plantButtons[i].interactable = false;
+                    plantButtons[i].interactable = toggle;
                 }
             }
         }
