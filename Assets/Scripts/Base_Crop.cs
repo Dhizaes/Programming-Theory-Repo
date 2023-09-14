@@ -14,7 +14,8 @@ public class Base_Crop : MonoBehaviour
     public bool IsGrowing { get; private set; }
     public bool IsReady { get; private set; }
 
-    protected int m_timeUntilGrow = 60;
+    [SerializeField]
+    protected int timeUntilGrow = 60;
     protected int m_elapsedTime = 0;
 
     [SerializeField]
@@ -57,7 +58,7 @@ public class Base_Crop : MonoBehaviour
         {
             yield return new WaitForSeconds(1);
 
-            if (m_elapsedTime > m_timeUntilGrow)
+            if (m_elapsedTime > timeUntilGrow)
             {
                 countIt = false;
 
