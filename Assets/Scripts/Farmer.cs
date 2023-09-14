@@ -12,6 +12,8 @@ public class Farmer : MonoBehaviour
     private int m_wheats       = 0;
     private int m_wheatSeeds   = 0;
 
+    public Button[] plantButtons;
+
     public GameObject[] cropList;
 
     public FarmTile selectedFarmTile;
@@ -60,6 +62,40 @@ public class Farmer : MonoBehaviour
             case Base_Crop.ECropTypes.CROP_WHEAT:
                 m_wheats += amount;
                 break;
+        }
+    }
+
+    public void EnablePlantButtons()
+    {
+        if(plantButtons.Length > 0)
+        {
+            if(!ReferenceEquals(selectedFarmTile, null))
+            {
+                for (int i = 0; i < plantButtons.Length; i++)
+                {
+                    if (!ReferenceEquals(plantButtons[i], null))
+                    {
+                        plantButtons[i].enabled = true;
+                    }
+                }
+            }
+        }
+    }
+
+    public void DisablePlantButtons()
+    {
+        if (plantButtons.Length > 0)
+        {
+            if (!ReferenceEquals(selectedFarmTile, null))
+            {
+                for (int i = 0; i < plantButtons.Length; i++)
+                {
+                    if (!ReferenceEquals(plantButtons[i], null))
+                    {
+                        plantButtons[i].enabled = false;
+                    }
+                }
+            }
         }
     }
 }
