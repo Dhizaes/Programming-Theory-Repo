@@ -73,6 +73,8 @@ public class FarmTile : MonoBehaviour
                     cropClass.bindedTile = this;
 
                     playerFarmer.selectedFarmTile = null;
+
+                    playerFarmer.DisablePlantButtons();
                 }
                 else
                 {
