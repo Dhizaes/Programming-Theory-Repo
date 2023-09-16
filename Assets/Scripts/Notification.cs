@@ -39,9 +39,15 @@ public class Notification : MonoBehaviour
         {
             if(!ReferenceEquals(headerText, null) && !ReferenceEquals(messageText, null))
             {
-                Debug.Log(NotificationTypeToString(notificationType) + ": " + message);
+                headerText.text = NotificationTypeToString(notificationType);
+                messageText.text = message;
+                messageUI.SetActive(true);
             }
         }
+
+        Debug.Log(NotificationTypeToString(notificationType) + ": " + message);
+
+        StartCoroutine(DisableCountdown());
     }
 
     public void SendNotification(string message)
@@ -50,9 +56,20 @@ public class Notification : MonoBehaviour
         {
             if (!ReferenceEquals(messageText, null))
             {
-                Debug.Log(message);
+                messageText.text = message;
+                messageUI.SetActive(true);
             }
         }
+
+        Debug.Log(message);
+
+        StartCoroutine(DisableCountdown());
+    }
+
+    IEnumerator DisableCountdown()
+    {
+        yield return new WaitForSeconds(4);
+        messageUI.SetActive(false);
     }
 
     private string NotificationTypeToString(ENotificationType notificationType)
