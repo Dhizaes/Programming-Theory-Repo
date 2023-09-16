@@ -11,7 +11,9 @@ public class Base_Crop : MonoBehaviour
 
     protected SpriteRenderer spriteRenderer;
 
+    // ENCAPSULATION
     public bool IsGrowing { get; private set; }
+    // ENCAPSULATION
     public bool IsReady { get; private set; }
 
     [SerializeField]
@@ -73,12 +75,14 @@ public class Base_Crop : MonoBehaviour
         }
     }
 
+    // ABSTRACTION
     public void StartGrowing()
     {
         IsGrowing = true;
         StartCoroutine(GrowCountdown());
     }
 
+    // ABSTRACTION
     public void StopGrowing()
     {
         IsGrowing = false;
@@ -121,6 +125,7 @@ public class Base_Crop : MonoBehaviour
         StopGrowing();
     }
 
+    // ABSTRACTION
     public string CropTypeToString(ECropTypes cropType)
     {
         switch(cropType)

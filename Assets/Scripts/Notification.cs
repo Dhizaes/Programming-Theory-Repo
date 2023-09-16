@@ -72,6 +72,7 @@ public class Notification : MonoBehaviour
         messageUI.SetActive(false);
     }
 
+    // ABSTRACTION
     private string NotificationTypeToString(ENotificationType notificationType)
     {
         switch(notificationType)

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// INHERITANCE
 public class Crop_Corn : Base_Crop
 {
     private void Awake()
@@ -9,6 +10,7 @@ public class Crop_Corn : Base_Crop
         SetCropType(ECropTypes.CROP_CORN);
     }
 
+    // POLYMORPHISM
     protected override void OnGrowReady()
     {
         base.OnGrowReady();
